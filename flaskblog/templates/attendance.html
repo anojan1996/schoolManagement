@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="form-group">
+   {% for category, message in get_flashed_messages(with_categories = true) %}
+      <div class = "alert alert-danger">
+         {{ message }}
+      </div>
+   {% endfor %}
+   </div>
+      <div class="content-section">
+      <form action = "" method = "post">
+         {{ form.hidden_tag() }}
+         <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Add Attendance</legend>
+            <div class="form-group">
+               {{ form.username.label(class="form-control-label") }}
+
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+            </div> 
+            <div class="form-group">
+               {{ form.no_of_school_days.label(class="form-control-label") }}
+               {{ form.no_of_school_days(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+               {{ form.no_of_days_attended.label(class="form-control-label") }}
+               {{ form.no_of_days_attended(class="form-control form-control-lg") }}
+            </div> 
+            <div class="form-group">
+               {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+            
+            
+         </fieldset>
+      </form>
+   </div>
+{% endblock content %}

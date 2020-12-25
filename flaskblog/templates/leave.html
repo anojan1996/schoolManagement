@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="form-group">
+   {% for category, message in get_flashed_messages(with_categories = true) %}
+      <div class = "alert alert-danger">
+         {{ message }}
+      </div>
+   {% endfor %}
+   </div>
+      <div class="content-section">
+      <form action = "" method = "post">
+         {{ form.hidden_tag() }}
+         <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Leave Application Form</legend>
+            <div class="form-group">
+                {{ form.teacher.label(class="form-control-label") }}
+                {{ form.teacher(class="form-control form-control-lg") }}
+             </div>
+            <div class="form-group">
+               {{ form.grade.label(class="form-control-label") }}
+               {{ form.grade(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+               {{ form.no_of_days.label(class="form-control-label") }}
+               {{ form.no_of_days(class="form-control form-control-lg") }}
+            </div> 
+            <div class="form-group">
+               {{ form.date.label(class="form-control-label") }}
+               {{ form.date(class="form-control form-control-lg") }}
+            </div> 
+            <div class="form-group">
+               {{ form.reason.label(class="form-control-label") }}
+               {{ form.reason(class="form-control form-control-lg") }}
+            </div>   
+            <div class="form-group">
+               {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+            
+            
+         </fieldset>
+      </form>
+   </div>
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="wrapper">
+  <div class="sidebar">
+      <h2>Teacher</h2>
+      <ul>
+          <li><a href="{{ url_for('new') }}" >Add Marks</a></li>
+          <li><a href="{{ url_for('attendance') }}">Add Attendance</a></li>
+          <li><a href="{{ url_for('view') }}">Add Progress Report Feedback</a></li>
+          <li><a href="{{ url_for('notice') }}">Add Notice</a></li>
+          <li><a href="{{ url_for('leave') }}">Leave Application</a></li>
+      </ul> 
+  </div>
+</div>
+{% endblock content %}
