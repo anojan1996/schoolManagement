@@ -146,6 +146,7 @@ def leave():
         return redirect(url_for('show_all'))
     return render_template('leave.html', form=form)
 
+# @authorize.view
 @app.route('/notice', methods=['GET', 'POST'])
 def notice():
     form = noticesForm()
