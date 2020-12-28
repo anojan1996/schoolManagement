@@ -1,31 +1,119 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="form-group">
-   {% for category, message in get_flashed_messages(with_categories = true) %}
-      <div class = "alert alert-danger">
-         {{ message }}
+<div class="col-md-10">
+  <div class="content-section">
+    <article class="media content-section">
+      <img class="rounded-circle article-img"
+           src="{{ url_for('static', filename='profile_pics/' + notice.author.image_file) }}">
+      <div class="media-body">
+        <div class="article-metadata">
+          <a class="mr-2" href="#">{{ notice.author.username }}</a>
+          <small class="text-muted">{{ notice.data_posted.strftime('%Y-%m-%d') }}</small>
+
+        </div>
+        <h2 class="article-title">{{ notice.title }}</h2>
+        <p class="article-content">{{ notice.content }}</p>
+        {% if authorize.update('notices') %}
+        <div class="article-footer">
+          <button type="button" class="btn btn-primary btn-sm m-1 float-left" data-toggle="modal"
+                  data-target="#updateModal">Edit
+          </button>
+          <button type="button" class="btn btn-danger btn-sm m-1 float-right" data-toggle="modal"
+                  data-target="#deleteModal">Delete
+          </button>
+        </div>
+        {% endif %}
+
       </div>
-   {% endfor %}
-   </div>
-      <div class="content-section">
-      <form action = "" method = "post">
-         {{ form.hidden_tag() }}
-         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Notice</legend>
-            <div class="form-group">
-                {{ form.title.label(class="form-control-label") }}
-                {{ form.title(class="form-control form-control-lg") }}
+
+
+    </article>
+
+
+    <!--Model-->
+
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
+         aria-labelledby="updateModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateModalLabel">Update notice?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form method="POST" action="">
+            <div class="modal-body">
+              <div class="content-section">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                  <legend class="border-bottom mb-4"> {{legend}}</legend>
+                  <div class="form-group">
+                    {{ form.title.label(class="form-control-label") }}
+
+                    {% if form.title.errors %}
+                    {{ form.title }}
+                    <div class="invalid-feedback">
+                      {% for error in form.title.errors %}
+                      <span> {{error}}</span>
+                      {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.title(class="form-control form-control-lg") }}
+                    {% endif%}
+                  </div>
+                  <div class="form-group">
+                    {{ form.content.label(class="form-control-label") }}
+                    {% if form.content.errors %}
+                    {{ form.content(class = "form-control form-control-lg is-invalid")}}
+                    <div class="invalid-feedback">
+                      {% for error in form.content.errors %}
+                      <span> {{error}}</span>
+                      {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.content(class="form-control form-control-lg") }}
+                    {% endif%}
+                  </div>
+                </fieldset>
+              </div>
+
             </div>
-            <div class="form-group">
-               {{ form.content.label(class="form-control-label") }}
-               {{ form.content(class="form-control form-control-lg") }}
-            </div>   
-            <div class="form-group">
-               {{ form.submit(class="btn btn-outline-info") }}
+            <div class="modal-footer">
+              <div class="form-group">
+                {{form.submit(class="btn btn-outline-info")}}
+              </div>
             </div>
-            
-            
-         </fieldset>
-      </form>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+         aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete notice?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <form action="{{ url_for('delete_notice', notice_id=notice.id) }}" method="POST">
+              <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
 </div>
 {% endblock content %}

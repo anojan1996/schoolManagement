@@ -1,16 +1,19 @@
+from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from flask_login import current_user
-from sqlalchemy.sql.functions import user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, TextAreaField, TextField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, \
+    IntegerField, TextAreaField
 from wtforms import validators, ValidationError
-from flaskblog.models import User, students
-from wtforms.fields.html5 import DateField, DateTimeField
+from wtforms.fields.html5 import DateField
+
+from flaskblog.models import User
 
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
                            [validators.DataRequired("Pleaes enter your name")])
+    role = StringField('Role',
+                           [validators.DataRequired("Pleaes enter your Role")])
     email = StringField('Email',
                         [validators.DataRequired("Please enter your email address."),
                          validators.Email("Please enter your email address.")])
@@ -28,6 +31,11 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('That email is taken. Please choose a different one.')
+    def validate_role(self, role):
+        pass
+        # user = Role.query.filter_by(name=role.data).first()
+        # if not user:
+        #     raise ValidationError('That role is not there. Please choose a different one.')
 
 
 class LoginForm(FlaskForm):
@@ -93,9 +101,8 @@ class leavesForm(FlaskForm):
     reason = TextAreaField('Reason')
     submit = SubmitField('Submit')
 
-class noticesForm(FlaskForm):
+class NoticeForm(FlaskForm):
     title = StringField('Title')
     content = TextAreaField('Content')
     submit = SubmitField('Submit')
-
 

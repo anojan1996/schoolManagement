@@ -1,87 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
-    {% if title %}
-    <title>Flask Blog - {{ title }}</title>
-    {% else %}
-    <title>Flask Blog</title>
-    {% endif %}
+  {% if title %}
+  <title>Flask Blog - {{ title }}</title>
+  {% else %}
+  <title>Flask Blog</title>
+  {% endif %}
 </head>
 <body>
 <header class="site-header">
-    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-        <div class="container">
-            <a class="navbar-brand mr-4" href="/"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
-                    aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarToggle">
-                <div class="navbar-nav mr-auto">
-                    <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-                    <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
-                </div>
-                <!-- Navbar Right Side -->
-                <div class="navbar-nav">
-                    {% if current_user.is_authenticated %}
-                    <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
-                    <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
-                    {% else %}
-                    <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
-                    <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
-                    {% endif %}
-                </div>
-            </div>
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    <div class="container">
+      <a class="navbar-brand mr-4" href="/">smartSQL</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+              data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          <a class="nav-item nav-link" href={{url_for('about')}}>About</a>
         </div>
-    </nav>
+        <!-- Navbar Right Side -->
+        <div class="navbar-nav">
+          {% if current_user.is_authenticated %}
+          <a class="nav-item nav-link" href={{url_for('account')}}>Profile</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Portal </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href={{url_for('notices')}}>Notice</a>
+              <a class="dropdown-item" href={{url_for('leave')}}>Leave</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href={{url_for('logout')}}>Logout</a>
+            </div>
+          </li>
+          {%else%}
+          <a class="nav-item nav-link" href={{url_for('login')}}>Login</a>
+          <a class="nav-item nav-link" href={{url_for('register')}}>Register</a>
+          {%endif%}
+        </div>
+      </div>
+    </div>
+  </nav>
 </header>
+
+
 <main role="main" class="container">
 
-    <div class="row content-section">
-        <div class="col-md-4">
-            <p class='text-muted'>
-            <h3>Dashboard</h3>
-            <ul>
-                <li class="list-group-item list-group-item-light"><a href="{{ url_for('new') }}">Add Marks</a></li>
-                <li class="list-group-item list-group-item-light"><a href="{{ url_for('attendance') }}">Add
-                    Attendance</a></li>
-                <li class="list-group-item list-group-item-light"><a href="{{ url_for('view') }}">Add Progress Report
-                    Feedback</a></li>
-                <li class="list-group-item list-group-item-light"><a href="{{ url_for('view') }}">Add Progress Report
-                    Feedback</a></li>
-                <li class="list-group-item list-group-item-light"><a href="{{ url_for('notice') }}">Add Notice</a></li>
-                <li class="list-group-item list-group-item-light">
-                    <a href="{{ url_for('leave') }}">Leave Application</a></li>
-
-
-            </ul>
-            </p>
-        </div>
-
-        <div class="col-md-8">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-            {% for category, message in messages %}
-            <div class="alert alert-{{ category }}">
-                {{ message }}
-            </div>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
-            {% block content %}{% endblock %}
-        </div>
-
+  <div class="row content-section">
+      {% block content %}{% endblock %}
     </div>
+
+  </div>
 </main>
 
 
