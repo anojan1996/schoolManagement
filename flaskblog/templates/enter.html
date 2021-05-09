@@ -1,15 +1,188 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="wrapper">
-  <div class="sidebar">
-      <h2>Teacher</h2>
-      <ul>
-          <li><a href="{{ url_for('new') }}" >Add Marks</a></li>
-          <li><a href="{{ url_for('attendance') }}">Add Attendance</a></li>
-          <li><a href="{{ url_for('view') }}">Add Progress Report Feedback</a></li>
-          <li><a href="{{ url_for('notice') }}">Add Notice</a></li>
-          <li><a href="{{ url_for('leave') }}">Leave Application</a></li>
-      </ul> 
-  </div>
+
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">LooooooSH</h1>
+  <p class="lead"> Hey What you are looking for....</p>
 </div>
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Features</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">Notices</h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>View</li>
+          <li>Edit</li>
+          <li>Delete</li>
+          <li>Delete can not be done</li>
+        </ul>
+        <a href="{{url_for('notices')}}" class="btn btn-lg btn-block btn-outline-primary"
+           role=button>Notices</a>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Features</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">Reports</h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>View</li>
+          <li>Edit</li>
+          <li>Delete</li>
+          <li>Delete can not be done</li>
+        </ul>
+        <a href="{{url_for('reports')}}" class="btn btn-lg btn-block btn-outline-primary"
+           role=button>Reports</a>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Features</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">Leaves</h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Apply for</li>
+          <li> a leave</li>
+          <li>with specific</li>
+          <li>Reason</li>
+        </ul>
+        <a href="{{url_for('leave')}}" class="btn btn-lg btn-block btn-outline-primary" role=button>Leave</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Features</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">Students</h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>View</li>
+          <li>Edit</li>
+          <li>Delete</li>
+          <li>Delete can not be done</li>
+        </ul>
+        <a href="{{url_for('students')}}" class="btn btn-lg btn-block btn-outline-primary"
+           role=button>Students</a>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Features</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title"> Presents</h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>View</li>
+          <li>Edit</li>
+          <li>Delete</li>
+          <li>Delete can not be done</li>
+        </ul>
+        <a href="{{url_for('attendances')}}" class="btn btn-lg btn-block btn-outline-primary"
+           role=button>Attendance</a>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Features</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">Profile</h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Apply for</li>
+          <li> a leave</li>
+          <li>with specific</li>
+          <li>Reason</li>
+        </ul>
+        <a href="{{url_for('account')}}" class="btn btn-lg btn-block btn-outline-primary"
+           role=button>Profile</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Features</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">Terms</h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>View</li>
+          <li>Edit</li>
+          <li>Delete</li>
+          <li>Delete can not be done</li>
+        </ul>
+        <a href="{{url_for('terms')}}" class="btn btn-lg btn-block btn-outline-primary"
+           role=button>Students</a>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Features</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title"> Subjects</h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>View</li>
+          <li>Edit</li>
+          <li>Delete</li>
+          <li>Delete can not be done</li>
+        </ul>
+        <a href="{{url_for('subjects')}}" class="btn btn-lg btn-block btn-outline-primary"
+           role=button>Subjects</a>
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+      <div class="col-12 col-md">
+        <img class="mb-2" src="../assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+        <small class="d-block mb-3 text-muted">&copy; 2017-2020</small>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Features</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Cool stuff</a></li>
+          <li><a class="text-muted" href="#">Random feature</a></li>
+          <li><a class="text-muted" href="#">Team feature</a></li>
+          <li><a class="text-muted" href="#">Stuff for developers</a></li>
+          <li><a class="text-muted" href="#">Another one</a></li>
+          <li><a class="text-muted" href="#">Last time</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Resources</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Resource</a></li>
+          <li><a class="text-muted" href="#">Resource name</a></li>
+          <li><a class="text-muted" href="#">Another resource</a></li>
+          <li><a class="text-muted" href="#">Final resource</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>About</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Team</a></li>
+          <li><a class="text-muted" href="#">Locations</a></li>
+          <li><a class="text-muted" href="#">Privacy</a></li>
+          <li><a class="text-muted" href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
 {% endblock content %}

@@ -1,43 +1,127 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="form-group">
-   {% for category, message in get_flashed_messages(with_categories = true) %}
-      <div class = "alert alert-danger">
-         {{ message }}
+<article class="media col-md-12">
+  <img class="rounded-circle article-img"
+       src="{{ url_for('static', filename='profile_pics/' + leave.author.image_file) }}">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ leave.author.username }}</a>
+      <small class="text-muted">{{ leave.data_posted.strftime('%Y-%m-%d') }}</small>
+
+    </div>
+    <h2 class="article-title" align="center">{{ leave.no_of_days }}</h2>
+    <br/>
+    <p class="article-content">{{ leave.reason }}</p>
+    {% if authorize.update('leaves') %}
+    <div class="article-footer">
+      <button type="button" class="btn btn-danger btn-sm m-1 float-left" data-toggle="modal"
+              data-target="#deleteModal">Delete
+      </button>
+      <button type="button" class="btn btn-primary btn-sm m-1 float-right" data-toggle="modal"
+              data-target="#updateModal">Edit
+      </button>
+
+    </div>
+    {% endif %}
+  </div>
+
+
+</article>
+
+
+<!--Model-->
+
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
+     aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">Update leave?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-   {% endfor %}
-   </div>
-      <div class="content-section">
-      <form action = "" method = "post">
-         {{ form.hidden_tag() }}
-         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Leave Application Form</legend>
-            <div class="form-group">
-                {{ form.teacher.label(class="form-control-label") }}
-                {{ form.teacher(class="form-control form-control-lg") }}
-             </div>
-            <div class="form-group">
-               {{ form.grade.label(class="form-control-label") }}
-               {{ form.grade(class="form-control form-control-lg") }}
-            </div>
-            <div class="form-group">
-               {{ form.no_of_days.label(class="form-control-label") }}
-               {{ form.no_of_days(class="form-control form-control-lg") }}
-            </div> 
-            <div class="form-group">
-               {{ form.date.label(class="form-control-label") }}
-               {{ form.date(class="form-control form-control-lg") }}
-            </div> 
-            <div class="form-group">
-               {{ form.reason.label(class="form-control-label") }}
-               {{ form.reason(class="form-control form-control-lg") }}
-            </div>   
-            <div class="form-group">
-               {{ form.submit(class="btn btn-outline-info") }}
-            </div>
-            
-            
-         </fieldset>
+      <form method="POST" action="">
+        <div class="modal-body">
+          <div class="content-section">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+              <legend class="border-bottom mb-4"> {{legend}}</legend>
+              <div class="form-group">
+                {{ form.no_of_days.label(class="form-control-label") }}
+
+                {% if form.no_of_days.errors %}
+                {{ form.no_of_days }}
+                <div class="invalid-feedback">
+                  {% for error in form.no_of_days.errors %}
+                  <span> {{error}}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.no_of_days(class="form-control form-control-lg") }}
+                {% endif%}
+              </div>
+              <div class="form-group">
+                {{ form.reason.label(class="form-control-label") }}
+                {% if form.reason.errors %}
+                {{ form.content(class = "form-control form-control-lg is-invalid")}}
+                <div class="invalid-feedback">
+                  {% for error in form.reason.errors %}
+                  <span> {{error}}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.reason(class="form-control form-control-lg") }}
+                {% endif%}
+              </div>
+            </fieldset>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <div class="form-group">
+            {{form.submit(class="btn btn-outline-info")}}
+          </div>
+        </div>
       </form>
-   </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+     aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete leave?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <div class="container-fluid">
+            <div class="col-xs-4">
+              <form action="{{ url_for('delete_leave', leave_id=leave.id) }}" method="POST">
+                <input class="btn btn-danger btn-sm m-1 float-left" type="submit" value="Delete">
+              </form>
+            </div>
+            <div class="col-xs-4 text-right">
+
+              <button type="button" class="btn btn-dark btn-sm m-1"
+                      data-dismiss="modal">
+                Close
+              </button>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
 {% endblock content %}
