@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class=" col-md-12">
+  <h2 align="center">Students Report Board</h2>
+  <br/>
+  {% for student in students %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img"
+         src="{{ url_for('static', filename='profile_pics/' + student.image_file) }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{{url_for('reportsByStudentId', student_id = student.id)}}">{{
+          student.username}}</a>
+
+      </div>
+      <h2><a class="article-title"
+             href="{{url_for('reportsByStudentId', student_id = student.id)}}">All Report cards</a>
+      </h2>
+      <p class="article-content">All the reports of {{student.username}}'s added here. He is good at
+        studying.</p>
+    </div>
+  </article>
+  <br/>
+  {% endfor %}
+</div>
+</div>
+{% endblock content %}

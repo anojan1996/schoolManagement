@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="col-12">
+  <!-- Button trigger modal -->
+  <div class="row  ">
+    <div class="col-md-9 float-left">
+      <h3>Attendance Board</h3>
+    </div>
+    <div class="col-md-2 float-right" >
+      <button type="button" class="btn btn-secondary " data-toggle="modal"
+              data-target="#addNotice">
+        add attendance
+      </button>
+    </div>
+  </div>
+
+  <br/>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="addNotice" tabindex="-1" role="dialog"
+       aria-labelledby="addNoticeLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Attendance</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="POST" action="">
+          <div class="modal-body">
+            <div class="content-section">
+              {{ form.hidden_tag() }}
+
+              <fieldset class="form-group">
+                <legend class="border-bottom mb-4"> Attendance Form</legend>
+                <div class="form-group">
+                  {{ form.student_id.label(class="form-control-label") }}
+                  {{ form.student_id(class="form-control form-control-lg") }}
+                </div>
+                <div class="form-group">
+                  {{ form.student_name.label(class="form-control-label") }}
+
+                  {% if form.student_name.errors %}
+                  {{ form.student_name(class="form-control form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ form.student_name(class="form-control form-control-lg") }}
+                  {% endif %}
+                </div>
+                <div class="form-group">
+                  {{ form.student_grade.label(class="form-control-label") }}
+                  {{ form.student_grade(class="form-control form-control-lg") }}
+                </div>
+                <div class="form-group">
+                  {{ form.student_term.label(class="form-control-label") }}
+                  {{ form.student_term(class="form-control form-control-lg") }}
+                </div>
+
+                <div class="form-group">
+                  {{ form.no_of_school_days.label(class="form-control-label") }}
+                  {{ form.no_of_school_days(class="form-control form-control-lg") }}
+                </div>
+                <div class="form-group">
+                  {{ form.no_of_days_attended.label(class="form-control-label") }}
+                  {{ form.no_of_days_attended(class="form-control form-control-lg") }}
+                </div>
+
+              </fieldset>
+
+
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <div class="form-group">
+              {{form.submit(class="btn btn-outline-info")}}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <br/>
+
+
+  <div class="content-section">
+    <article class="media  col-md-12">
+      <div class="media-body">
+        <div class="article-body">
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">Student Id</th>
+              <th scope="col">Student Name</th>
+              <th scope="col">Grade</th>
+              <th scope="col">Term</th>
+              <th scope="col">Total Days</th>
+              <th scope="col">Present Days</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {%for attendance in attendances %}
+            <tr>
+              <td>{{attendance.student.id}}</td>
+              <td>{{attendance.student.username}}</td>
+              <td>{{attendance.term.grade}}</td>
+              <td>{{attendance.term.term}}</td>
+              <td>{{attendance.no_of_school_days}}</td>
+              <td>{{attendance.no_of_days_attended}}</td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="article-footer">
+          <button type="button" class="btn btn-primary btn-sm m-1 float-right" data-toggle="modal"
+                  data-target="#updateModal">Edit
+          </button>
+          <button type="button" class="btn btn-danger btn-sm m-1 float-left" data-toggle="modal"
+                  data-target="#deleteModal">Delete
+          </button>
+        </div>
+
+
+      </div>
+
+
+    </article>
+
+  </div>
+
+</div>
+{% endblock content %}

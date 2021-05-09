@@ -1,0 +1,173 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<article class="media  col-md-12">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ report['student_name']}}</a>
+      <small class="text-muted">{{ report['grade']}}</small>
+      <small class="text-muted float-lg-right">{{ report['term']}}</small>
+
+    </div>
+    <h2 class="article-title" align="center"> {{report['term']}} Report of {{
+      report['student_name'].capitalize() }} </h2>
+
+    <div class="article-body">
+      <table class="table">
+        {% set index = 1 %}
+
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Subject Name</th>
+          <th scope="col">Marks</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {%for subject_name, subject_mark in report['term_marks'].items() %}
+        <tr>
+          <th scope="row">{{index}}</th>
+          {% set index = index + 1 %}
+
+          <td>{{subject_name}}</td>
+          <td>{{subject_mark}}</td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="article-footer">
+      <button type="button" class="btn btn-primary btn-sm m-1 float-right" data-toggle="modal"
+              data-target="#updateModal">Edit
+      </button>
+      <button type="button" class="btn btn-danger btn-sm m-1 float-left" data-toggle="modal"
+              data-target="#deleteModal">Delete
+      </button>
+    </div>
+
+
+  </div>
+
+
+</article>
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+     aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete notice?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <div class="container-fluid">
+          <div class="col-xs-4">
+            <form
+                action="{{ url_for('deleteReport', student_id=report['student_id'], term_id = report['aggregate_term_id']) }} "
+                method="POST">
+              <input class="btn btn-danger btn-sm m-1 float-left" type="submit" value="Delete">
+            </form>
+          </div>
+          <div class="col-xs-4 text-right">
+
+            <button type="button" class="btn btn-dark btn-sm m-1"
+                    data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Model-->
+
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
+     aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">Update Report?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4 form-title" align="center">Report card</legend>
+          <div class="form-group">
+            {{ form.studentName.label(class="form-control-label") }}
+
+            {% if form.studentName.errors %}
+            {{ form.studentName(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in form.studentName.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.studentName(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+
+
+          <div class="form-group">
+            {{ form.grade.label(class="form-control-label") }}
+            {{ form.grade(class="form-control form-control-lg") }}
+          </div>
+          <div class="form-group">
+            {{ form.term.label(class="form-control-label") }}
+            {{ form.term(class="form-control form-control-lg") }}
+          </div>
+
+
+          <div class="form-group">
+            {{ form.english.label(class="form-control-label") }}
+            {{ form.english(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form-group">
+            {{ form.maths.label(class="form-control-label") }}
+            {{ form.maths(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form-group">
+            {{ form.tamil.label(class="form-control-label") }}
+            {{ form.tamil(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form-group">
+            {{ form.sinhala.label(class="form-control-label") }}
+            {{ form.sinhala(class="form-control form-control-lg") }}
+          </div>
+          <div class="form-group">
+            {{ form.science.label(class="form-control-label") }}
+            {{ form.science(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+          </div>
+
+
+        </fieldset>
+      </form>
+
+    </div>
+
+  </div>
+</div>
+
+
+{% endblock content %}

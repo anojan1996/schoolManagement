@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="form-group">
+  {% for category, message in get_flashed_messages(with_categories = true) %}
+  <div class="alert alert-danger">
+    {{ message }}
+  </div>
+  {% endfor %}
+</div>
+<div class="content-section">
+  <form action="" method="post">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Add Marks</legend>
+      <div class="form-group">
+        {{ form.studentName.label(class="form-control-label") }}
+
+        {% if form.studentName.errors %}
+        {{ form.studentName(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.studentName.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        {{ form.studentName(class="form-control form-control-lg") }}
+        {% endif %}
+      </div>
+
+
+      <div class="form-group">
+        {{ form.grade.label(class="form-control-label") }}
+        {{ form.grade(class="form-control form-control-lg") }}
+      </div>
+      <div class="form-group">
+        {{ form.term.label(class="form-control-label") }}
+        {{ form.term(class="form-control form-control-lg") }}
+      </div>
+
+
+      <div class="form-group">
+        {{ form.english.label(class="form-control-label") }}
+        {{ form.english(class="form-control form-control-lg") }}
+      </div>
+
+      <div class="form-group">
+        {{ form.maths.label(class="form-control-label") }}
+        {{ form.maths(class="form-control form-control-lg") }}
+      </div>
+
+      <div class="form-group">
+        {{ form.tamil.label(class="form-control-label") }}
+        {{ form.tamil(class="form-control form-control-lg") }}
+      </div>
+
+      <div class="form-group">
+        {{ form.sinhala.label(class="form-control-label") }}
+        {{ form.sinhala(class="form-control form-control-lg") }}
+      </div>
+
+      <div class="form-group">
+        {{ form.submit(class="btn btn-outline-info") }}
+      </div>
+
+
+    </fieldset>
+  </form>
+</div>
+{% endblock content %}

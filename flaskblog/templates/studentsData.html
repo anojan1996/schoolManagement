@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Students Board</h1>
+  <p class="lead"> All LooSH student's Details</p>
+</div>
+
+<div class="container card-body">
+  {% for i in range(0,total,3) %}
+  <div class="card-deck mb-3 text-center">
+    {% if i < total %}
+    <div class="card mb-4  shadow-sm col-md-4">
+      <div class="card-header w-100">
+        <img class="rounded-circle article-img"
+             src="{{ url_for('static', filename='profile_pics/' + students[i].image_file) }}">
+        <h4 class="my-0 font-weight-normal">{{students[i].username.capitalize()}}</h4>
+      </div>
+      <div class="card-body">
+               <ul class="list-group list-group-flush">
+          <a class=" nav-item nav-link list-group-item"
+             href="{{url_for('reportsByStudentId', student_id = students[i].id)}}">Reports</a>
+          <a class="list-group-item"
+             href="{{url_for('attendancesByStudentId', student_id = students[i].id)}}">Attendance</a>
+          <br/>
+          <a href="{{url_for('studentById',id = students[i].id)}}"
+             class="btn btn-lg btn-block btn-outline-primary" role=button>Profile</a>
+
+        </ul>
+
+      </div>
+    </div>
+    {% endif %}
+    {% if i+1 < total %}
+    <div class="card mb-4 col-md-4 shadow-sm">
+      <div class="card-header card-title pricing-card-title ">
+        <img class="rounded-circle article-img"
+             src="{{ url_for('static', filename='profile_pics/' + students[i+1].image_file) }}">
+        <h4 class="my-0 font-weight-normal">{{students[i+1].username.capitalize()}}</h4>
+      </div>
+      <div class="card-body">
+                <ul class="list-group list-group-flush">
+          <a class=" nav-item nav-link list-group-item"
+             href="{{url_for('reportsByStudentId', student_id = students[i+1].id)}}">Reports</a>
+          <a class="list-group-item"
+             href="{{url_for('attendancesByStudentId', student_id = students[i+1].id)}}">Attendance</a>
+          <br/>
+          <a href="{{url_for('studentById',id = students[i+1].id)}}"
+             class="btn btn-lg btn-block btn-outline-primary" role=button>Profile</a>
+
+        </ul>
+
+      </div>
+    </div>
+    {% else %}
+
+    {% endif %}
+    {% if i+2 < total %}
+    <div class="card mb-4 col-md-4 shadow-sm">
+      <div class="card-header">
+        <img class="rounded-circle article-img"
+             src="{{ url_for('static', filename='profile_pics/' + students[i+2].image_file) }}">
+        <h4 class="my-0 font-weight-normal">{{students[i+2].username.capitalize()}}</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <a class=" nav-item nav-link list-group-item"
+             href="{{url_for('reportsByStudentId', student_id = students[i+2].id)}}">Reports</a>
+          <a class="list-group-item"
+             href="{{url_for('attendancesByStudentId', student_id = students[i+2].id)}}">Attendance</a>
+          <br/>
+          <a href="{{url_for('studentById',id = students[i+2].id)}}"
+             class="btn btn-lg btn-block btn-outline-primary" role=button>Profile</a>
+
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  {% endfor %}
+
+  <footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+      <div class="col-12 col-md">
+        <img class="mb-2" src="../assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+        <small class="d-block mb-3 text-muted">&copy; 2017-2020</small>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Features</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Cool stuff</a></li>
+          <li><a class="text-muted" href="#">Random feature</a></li>
+          <li><a class="text-muted" href="#">Team feature</a></li>
+          <li><a class="text-muted" href="#">Stuff for developers</a></li>
+          <li><a class="text-muted" href="#">Another one</a></li>
+          <li><a class="text-muted" href="#">Last time</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Resources</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Resource</a></li>
+          <li><a class="text-muted" href="#">Resource name</a></li>
+          <li><a class="text-muted" href="#">Another resource</a></li>
+          <li><a class="text-muted" href="#">Final resource</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>About</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Team</a></li>
+          <li><a class="text-muted" href="#">Locations</a></li>
+          <li><a class="text-muted" href="#">Privacy</a></li>
+          <li><a class="text-muted" href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+{% endblock content %}
