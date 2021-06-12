@@ -44,6 +44,7 @@ def not_found():
 
 
 @app.route("/enter")
+@login_required
 def enter():
   return render_template('enter.html')
 
@@ -70,9 +71,9 @@ def register():
     print(user)
     db.session.add(user)
     db.session.commit()
-    flash('Your account has been created! You are now able to log in',
-          'success')
-    return redirect(url_for('notices'))
+    login_user(user)
+    flash(f"Account Created Successfully! You are now logged in as {user.username}", category='success')
+    return redirect(url_for('enter'))
   return render_template('register.html', title='Register', form=form)
 
 
@@ -87,6 +88,7 @@ def login():
     if user and bcrypt.check_password_hash(user.password, form.password.data):
       login_user(user, remember=form.remember.data)
       next_page = request.args.get('next')
+      flash(f'Success! You are logged in as: {user.username}', category='success')
       return redirect(next_page) if next_page else redirect(url_for('enter'))
     else:
       flash('Login Unsuccessful. Please check email and password', 'danger')
@@ -96,6 +98,7 @@ def login():
 @app.route("/logout")
 def logout():
   logout_user()
+  flash("You have been logged out!", category='info')
   return redirect(url_for('home'))
 
 
@@ -165,6 +168,7 @@ from flaskblog.models import Notice
 
 
 @app.route("/notices", methods=['GET', 'POST'])
+@login_required
 def notices():
   form = NoticeForm()
   if form.validate_on_submit():
@@ -178,6 +182,7 @@ def notices():
   return render_template('notices.html', notices=notices, form=form)
 
 @app.route('/leave', methods=['GET', 'POST'])
+@login_required
 def leave():
   form = LeaveForm()
   if form.validate_on_submit():
@@ -263,6 +268,7 @@ def delete_leave(leave_id):
 
 
 @app.route("/students", methods=['GET'])
+@login_required
 def students():
   studentsGroups = db.session.query(UserGroup).filter_by(group_id=3).all()
   students = []
@@ -414,6 +420,7 @@ def reportByTermIdAndStudentId(student_id, term_id):
 
 
 @app.route("/reports", methods=['GET', 'POST'])
+@login_required
 def reports():
   form = Report()
   reports = []
@@ -511,6 +518,7 @@ def deleteReport(student_id, term_id):
 
 
 @app.route('/subjects', methods=['GET', 'POST'])
+@login_required
 def subjects():
   form = SubjectForm()
   if request.method == "GET":
@@ -525,6 +533,7 @@ def subjects():
 
 
 @app.route('/terms', methods=['GET', 'POST'])
+@login_required
 def terms():
   form = TermForm()
   if request.method == "GET":
@@ -548,6 +557,7 @@ def terms():
 
 
 @app.route('/attendances', methods=['GET', 'POST'])
+@login_required
 def attendances():
   student_attendances = Attendance.query.order_by(
     desc(Attendance.data_posted)).all()
