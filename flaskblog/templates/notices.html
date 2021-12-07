@@ -6,12 +6,14 @@
       <div class="col-10">
         <h3>Notice Board</h3>
       </div>
+      {% if authorize.update('attendances') %}
       <div class="col-2">
         <button type="button" class="btn btn-secondary" data-toggle="modal"
                 data-target="#addNotice">
           New Notice
         </button>
       </div>
+      {% endif %}
     </div>
 
   <br />

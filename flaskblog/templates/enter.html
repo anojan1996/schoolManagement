@@ -3,7 +3,7 @@
 
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <h1 class="display-4">LooooooSH</h1>
+  <h1 class="display-4">Primary School Management System</h1>
   <p class="lead"> Hey What you are looking for....</p>
 </div>
 
@@ -15,12 +15,13 @@
       </div>
       <div class="card-body">
         <h1 class="card-title pricing-card-title">Notices</h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>View</li>
-          <li>Edit</li>
-          <li>Delete</li>
-          <li>Delete can not be done</li>
-        </ul>
+           <p class="lead"> Notice Board</p>
+<!--        <ul class="list-unstyled mt-3 mb-4">-->
+<!--          <li>View</li>-->
+<!--          <li>Edit</li>-->
+<!--          <li>Delete</li>-->
+<!--          <li>Delete can not be done</li>-->
+<!--        </ul>-->
         <a href="{{url_for('notices')}}" class="btn btn-lg btn-block btn-outline-primary"
            role=button>Notices</a>
       </div>
@@ -31,12 +32,13 @@
       </div>
       <div class="card-body">
         <h1 class="card-title pricing-card-title">Reports</h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>View</li>
-          <li>Edit</li>
-          <li>Delete</li>
-          <li>Delete can not be done</li>
-        </ul>
+         <p class="lead"> Student's Report Card</p>
+<!--        <ul class="list-unstyled mt-3 mb-4">-->
+<!--          <li>View</li>-->
+<!--          <li>Edit</li>-->
+<!--          <li>Delete</li>-->
+<!--          <li>Delete can not be done</li>-->
+<!--        </ul>-->
         <a href="{{url_for('reports')}}" class="btn btn-lg btn-block btn-outline-primary"
            role=button>Reports</a>
       </div>
@@ -47,12 +49,13 @@
       </div>
       <div class="card-body">
         <h1 class="card-title pricing-card-title">Leaves</h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>Apply for</li>
-          <li> a leave</li>
-          <li>with specific</li>
-          <li>Reason</li>
-        </ul>
+         <p class="lead"> Leave Board</p>
+<!--        <ul class="list-unstyled mt-3 mb-4">-->
+<!--          <li>Apply for</li>-->
+<!--          <li> a leave</li>-->
+<!--          <li>with specific</li>-->
+<!--          <li>Reason</li>-->
+<!--        </ul>-->
         <a href="{{url_for('leave')}}" class="btn btn-lg btn-block btn-outline-primary" role=button>Leave</a>
       </div>
     </div>
@@ -65,12 +68,13 @@
       </div>
       <div class="card-body">
         <h1 class="card-title pricing-card-title">Students</h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>View</li>
-          <li>Edit</li>
-          <li>Delete</li>
-          <li>Delete can not be done</li>
-        </ul>
+        <p class="lead"> Student Board</p>
+<!--        <ul class="list-unstyled mt-3 mb-4">-->
+<!--          <li>View</li>-->
+<!--          <li>Edit</li>-->
+<!--          <li>Delete</li>-->
+<!--          <li>Delete can not be done</li>-->
+<!--        </ul>-->
         <a href="{{url_for('students')}}" class="btn btn-lg btn-block btn-outline-primary"
            role=button>Students</a>
       </div>
@@ -81,12 +85,13 @@
       </div>
       <div class="card-body">
         <h1 class="card-title pricing-card-title"> Presents</h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>View</li>
-          <li>Edit</li>
-          <li>Delete</li>
-          <li>Delete can not be done</li>
-        </ul>
+        <p class="lead"> Attendance Card</p>
+<!--        <ul class="list-unstyled mt-3 mb-4">-->
+<!--          <li>View</li>-->
+<!--          <li>Edit</li>-->
+<!--          <li>Delete</li>-->
+<!--          <li>Delete can not be done</li>-->
+<!--        </ul>-->
         <a href="{{url_for('attendances')}}" class="btn btn-lg btn-block btn-outline-primary"
            role=button>Attendance</a>
       </div>
@@ -97,18 +102,19 @@
       </div>
       <div class="card-body">
         <h1 class="card-title pricing-card-title">Profile</h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>Apply for</li>
-          <li> a leave</li>
-          <li>with specific</li>
-          <li>Reason</li>
-        </ul>
+        <p class="lead"> Account Details</p>
+<!--        <ul class="list-unstyled mt-3 mb-4">-->
+<!--          <li>Apply for</li>-->
+<!--          <li> a leave</li>-->
+<!--          <li>with specific</li>-->
+<!--          <li>Reason</li>-->
+<!--        </ul>-->
         <a href="{{url_for('account')}}" class="btn btn-lg btn-block btn-outline-primary"
            role=button>Profile</a>
       </div>
     </div>
   </div>
-
+  {% if authorize.update('attendances') %}
   <div class="card-deck mb-3 text-center">
     <div class="card mb-4 shadow-sm">
       <div class="card-header">
@@ -116,14 +122,15 @@
       </div>
       <div class="card-body">
         <h1 class="card-title pricing-card-title">Terms</h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>View</li>
-          <li>Edit</li>
-          <li>Delete</li>
-          <li>Delete can not be done</li>
-        </ul>
+        <p class="lead"> Teachers Can Add the Terms</p>
+<!--        <ul class="list-unstyled mt-3 mb-4">-->
+<!--          <li>View</li>-->
+<!--          <li>Edit</li>-->
+<!--          <li>Delete</li>-->
+<!--          <li>Delete can not be done</li>-->
+<!--        </ul>-->
         <a href="{{url_for('terms')}}" class="btn btn-lg btn-block btn-outline-primary"
-           role=button>Students</a>
+           role=button>Terms</a>
       </div>
     </div>
     <div class="card mb-4 shadow-sm">
@@ -132,16 +139,18 @@
       </div>
       <div class="card-body">
         <h1 class="card-title pricing-card-title"> Subjects</h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>View</li>
-          <li>Edit</li>
-          <li>Delete</li>
-          <li>Delete can not be done</li>
-        </ul>
+        <p class="lead"> Teachers Can Add the Subjects</p>
+<!--        <ul class="list-unstyled mt-3 mb-4">-->
+<!--          <li>View</li>-->
+<!--          <li>Edit</li>-->
+<!--          <li>Delete</li>-->
+<!--          <li>Delete can not be done</li>-->
+<!--        </ul>-->
         <a href="{{url_for('subjects')}}" class="btn btn-lg btn-block btn-outline-primary"
            role=button>Subjects</a>
       </div>
     </div>
+    {% endif %}
   </div>
 
 
@@ -149,37 +158,38 @@
     <div class="row">
       <div class="col-12 col-md">
         <img class="mb-2" src="../assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
-        <small class="d-block mb-3 text-muted">&copy; 2017-2020</small>
+        <small class="d-block mb-3 text-muted">16APC2706 T.Anojan</small>
+        <small class="d-block mb-3 text-muted">&copy; 2021</small>
       </div>
-      <div class="col-6 col-md">
-        <h5>Features</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="text-muted" href="#">Cool stuff</a></li>
-          <li><a class="text-muted" href="#">Random feature</a></li>
-          <li><a class="text-muted" href="#">Team feature</a></li>
-          <li><a class="text-muted" href="#">Stuff for developers</a></li>
-          <li><a class="text-muted" href="#">Another one</a></li>
-          <li><a class="text-muted" href="#">Last time</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Resources</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="text-muted" href="#">Resource</a></li>
-          <li><a class="text-muted" href="#">Resource name</a></li>
-          <li><a class="text-muted" href="#">Another resource</a></li>
-          <li><a class="text-muted" href="#">Final resource</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>About</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="text-muted" href="#">Team</a></li>
-          <li><a class="text-muted" href="#">Locations</a></li>
-          <li><a class="text-muted" href="#">Privacy</a></li>
-          <li><a class="text-muted" href="#">Terms</a></li>
-        </ul>
-      </div>
+<!--      <div class="col-6 col-md">-->
+<!--        <h5>Features</h5>-->
+<!--        <ul class="list-unstyled text-small">-->
+<!--          <li><a class="text-muted" href="#">Cool stuff</a></li>-->
+<!--          <li><a class="text-muted" href="#">Random feature</a></li>-->
+<!--          <li><a class="text-muted" href="#">Team feature</a></li>-->
+<!--          <li><a class="text-muted" href="#">Stuff for developers</a></li>-->
+<!--          <li><a class="text-muted" href="#">Another one</a></li>-->
+<!--          <li><a class="text-muted" href="#">Last time</a></li>-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--      <div class="col-6 col-md">-->
+<!--        <h5>Resources</h5>-->
+<!--        <ul class="list-unstyled text-small">-->
+<!--          <li><a class="text-muted" href="#">Resource</a></li>-->
+<!--          <li><a class="text-muted" href="#">Resource name</a></li>-->
+<!--          <li><a class="text-muted" href="#">Another resource</a></li>-->
+<!--          <li><a class="text-muted" href="#">Final resource</a></li>-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--      <div class="col-6 col-md">-->
+<!--        <h5>About</h5>-->
+<!--        <ul class="list-unstyled text-small">-->
+<!--          <li><a class="text-muted" href="#">Team</a></li>-->
+<!--          <li><a class="text-muted" href="#">Locations</a></li>-->
+<!--          <li><a class="text-muted" href="#">Privacy</a></li>-->
+<!--          <li><a class="text-muted" href="#">Terms</a></li>-->
+<!--        </ul>-->
+<!--      </div>-->
     </div>
   </footer>
 </div>

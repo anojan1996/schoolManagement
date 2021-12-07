@@ -9,9 +9,9 @@
       <small class="text-muted">{{ leave.data_posted.strftime('%Y-%m-%d') }}</small>
 
     </div>
-    <h2 class="article-title" align="center">{{ leave.no_of_days }}</h2>
+    <h2 class="article-title" align="center">Leave Date - {{ leave.reason }}</h2>
     <br/>
-    <p class="article-content">{{ leave.reason }}</p>
+<!--    <p class="article-content">{{ leave.reason }}</p>-->
     {% if authorize.update('leaves') %}
     <div class="article-footer">
       <button type="button" class="btn btn-danger btn-sm m-1 float-left" data-toggle="modal"
@@ -47,20 +47,20 @@
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
               <legend class="border-bottom mb-4"> {{legend}}</legend>
-              <div class="form-group">
-                {{ form.no_of_days.label(class="form-control-label") }}
+<!--              <div class="form-group">-->
+<!--                {{ form.no_of_days.label(class="form-control-label") }}-->
 
-                {% if form.no_of_days.errors %}
-                {{ form.no_of_days }}
-                <div class="invalid-feedback">
-                  {% for error in form.no_of_days.errors %}
-                  <span> {{error}}</span>
-                  {% endfor %}
-                </div>
-                {% else %}
-                {{ form.no_of_days(class="form-control form-control-lg") }}
-                {% endif%}
-              </div>
+<!--                {% if form.no_of_days.errors %}-->
+<!--                {{ form.no_of_days }}-->
+<!--                <div class="invalid-feedback">-->
+<!--                  {% for error in form.no_of_days.errors %}-->
+<!--                  <span> {{error}}</span>-->
+<!--                  {% endfor %}-->
+<!--                </div>-->
+<!--                {% else %}-->
+<!--                {{ form.no_of_days(class="form-control form-control-lg") }}-->
+<!--                {% endif%}-->
+<!--              </div>-->
               <div class="form-group">
                 {{ form.reason.label(class="form-control-label") }}
                 {% if form.reason.errors %}

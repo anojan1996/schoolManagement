@@ -6,12 +6,14 @@
     <div class="col-md-9 float-left">
       <h3>Attendance Board</h3>
     </div>
+    {% if authorize.update('attendances') %}
     <div class="col-md-2 float-right" >
       <button type="button" class="btn btn-secondary " data-toggle="modal"
               data-target="#addNotice">
-        add attendance
+        Add Attendance
       </button>
     </div>
+     {% endif %}
   </div>
 
   <br/>
@@ -97,7 +99,7 @@
           <table class="table">
             <thead class="thead-dark">
             <tr>
-              <th scope="col">Student Id</th>
+<!--              <th scope="col">Student Id</th>-->
               <th scope="col">Student Name</th>
               <th scope="col">Grade</th>
               <th scope="col">Term</th>
@@ -110,7 +112,7 @@
             <tbody>
             {%for attendance in attendances %}
             <tr>
-              <td>{{attendance.student.id}}</td>
+<!--              <td>{{attendance.student.id}}</td>-->
               <td>{{attendance.student.username}}</td>
               <td>{{attendance.term.grade}}</td>
               <td>{{attendance.term.term}}</td>
@@ -122,7 +124,7 @@
             </tbody>
           </table>
         </div>
-
+        {% if authorize.update('attendances') %}
         <div class="article-footer">
           <button type="button" class="btn btn-primary btn-sm m-1 float-right" data-toggle="modal"
                   data-target="#updateModal">Edit
@@ -131,6 +133,7 @@
                   data-target="#deleteModal">Delete
           </button>
         </div>
+        {% endif %}
 
 
       </div>

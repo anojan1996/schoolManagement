@@ -6,12 +6,14 @@
       <div class="col-10">
         <h3>Leave Form</h3>
       </div>
+      {% if authorize.update('attendances') %}
       <div class="col-2">
         <button type="button" class="btn btn-secondary" data-toggle="modal"
                 data-target="#addLeave">
           New Leave
         </button>
       </div>
+      {% endif %}
     </div>
 
   <br />
@@ -34,19 +36,19 @@
                 {{ form.hidden_tag() }}
                 <fieldset class="form-group">
                   <legend class="border-bottom mb-4"> {{legend}}</legend>
-                  <div class="form-group">
-                    {{ form.no_of_days.label(class="form-control-label") }}
-                    {% if form.no_of_days.errors %}
-                    {{ form.no_of_days(class = "form-control form-control-lg is-invalid")}}
-                    <div class="invalid-feedback">
-                      {% for error in form.no_of_days.errors %}
-                      <span> {{error}}</span>
-                      {% endfor %}
-                    </div>
-                    {% else %}
-                    {{ form.no_of_days(class="form-control form-control-lg") }}
-                    {% endif%}
-                  </div>
+<!--                  <div class="form-group">-->
+<!--                    {{ form.no_of_days.label(class="form-control-label") }}-->
+<!--                    {% if form.no_of_days.errors %}-->
+<!--                    {{ form.no_of_days(class = "form-control form-control-lg is-invalid")}}-->
+<!--                    <div class="invalid-feedback">-->
+<!--                      {% for error in form.no_of_days.errors %}-->
+<!--                      <span> {{error}}</span>-->
+<!--                      {% endfor %}-->
+<!--                    </div>-->
+<!--                    {% else %}-->
+<!--                    {{ form.no_of_days(class="form-control form-control-lg") }}-->
+<!--                    {% endif%}-->
+<!--                  </div>-->
                   <div class="form-group">
                     {{ form.reason.label(class="form-control-label") }}
                     {% if form.reason.errors %}
@@ -85,9 +87,9 @@
           <small class="text-muted float-lg-right" >{{ leave.author.groups[0].name}}</small>
 
         </div>
-        <h2><a class="article-title" href="{{url_for('leaves',leave_id=leave.id)}}">{{
-          leave.no_of_days }}</a></h2>
-        <p class="article-content">{{ leave.reason }}</p>
+        <h2><a class="article-title" href="{{url_for('leaves',leave_id=leave.id)}}">
+          Leave Date - {{ leave.reason }}</a></h2>
+<!--        <p class="article-content">Leave Date - {{ leave.reason }}</p>-->
       </div>
     </article>
     {% endfor %}

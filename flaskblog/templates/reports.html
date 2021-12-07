@@ -6,12 +6,14 @@
     <div class="col-10">
       <h3>All Reports</h3>
     </div>
+    {% if authorize.update('attendances') %}
     <div class="col-2">
       <button type="button" class="btn btn-secondary" data-toggle="modal"
               data-target="#addReport">
         New Report
       </button>
     </div>
+    {% endif %}
   </div>
 
 
@@ -99,14 +101,14 @@
     <article class="media content-section">
       <div class="media-body">
         <div class="article-metadata">
-          <a class="mr-2" href="#">{{ report['student_name']}}</a>
-          <small class="text-muted">{{ report['grade']}}</small>
-          <small class="text-muted float-lg-right" >{{ report['term']}}</small>
+          <a class="mr-2" href="#">Student Name - {{ report['student_name']}}</a>
+          <small class="text-muted">Grade - {{ report['grade']}}</small>
+          <small class="text-muted float-lg-right" >Term - {{ report['term']}}</small>
 
         </div>
         <h2><a class="article-title" href="{{url_for('reportByTermIdAndStudentId',student_id =report['student_id'],term_id =report['aggregate_term_id'] )}}">
-          {{report['student_name']}}'s {{report['grade']}} grade {{report['term']}} Report</a></h2>
-        <p class="article-content">Keep going nothing to stay more</p>
+          {{report['student_name']}}'s Grade {{report['grade']}}  Term {{report['term']}} Report</a></h2>
+<!--        <p class="article-content">Keep going nothing to stay more</p>-->
       </div>
     </article>
     {% endfor %}
